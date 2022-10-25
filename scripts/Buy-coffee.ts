@@ -1,8 +1,8 @@
-const hre = require("hardhat");
+const { ethers } = require("hardhat");
 
 async function getBalance(address: any) {
-  const balanceBigInt = await hre.waffle.provider.getBalance(address);
-  return hre.ethers.utils.formatEther(balanceBigInt);
+  const balanceBigInt = await ethers.waffle.provider.getBalance(address);
+  return ethers.utils.formatEther(balanceBigInt);
 }
 async function printBalance(addresses: string) {
   let idx = 0;
@@ -25,8 +25,8 @@ async function printMemos(memos: any) {
 }
 
 async function main() {
-  const [owner, tipper, tipper2, tipper3] = await hre.ethers.getSigners();
-  const BuyMeCoffee = await hre.ethers.getContractFactory("ByMeACoffee");
+  const [owner, tipper, tipper2, tipper3] = await ethers.getSigners();
+  const BuyMeCoffee = await ethers.getContractFactory("ByMeACoffee");
   const buyMeACoffee = await BuyMeCoffee.deploy();
   await buyMeACoffee.deployed();
 
